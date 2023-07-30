@@ -1,16 +1,54 @@
-
-import './App.css'
+import "./App.css";
+import { useState } from "react";
+import { ethers } from "ethers";
 
 function App() {
-  
+  const [userAccount, setUserAccount] = useState(null);
+  const [balance, setBalance] = useState(0)
 
+  const onConnect = () => {
+    if (window.ethereum) {
+      //  check if user has account
+
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((account) => {
+          setUserAccount(account[0]);
+          getBalance(account[0]);
+        });
+      window.ethereum.on("changeAccount", onConnect);
+      window.ethereum.on("chainChanged", chainChangedHandler)
+    } else {
+      alert("You haven't acoount on MetaMask yet");
+    }
+  };
+
+  const chainChangedHandler = () => {
+    window.location.reload();
+   }
+  const getBalance = (account) => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [account, "latest"] })
+      .then((balance) => {
+        setBalance(ethers.utils.formatEther(balance));
+        console.log(balance)
+      });
+  };
   return (
     <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {userAccount ? (
+        <div>
+          <span>Your account: { userAccount}</span>
+          <span>Your balance : {balance }</span>
+        </div>
+      ) : (
+        <>
+          <h2>Connect your wallet to app</h2>
+          <button onClick={onConnect}>Connect to wallet</button>
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
