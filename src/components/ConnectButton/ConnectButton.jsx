@@ -1,10 +1,9 @@
-import "./App.css";
 import { useState } from "react";
 import { ethers } from "ethers";
 
-function App() {
+export const ConnectButton = () => {
   const [userAccount, setUserAccount] = useState(null);
-  const [balance, setBalance] = useState(0)
+  const [balance, setBalance] = useState(0);
 
   const onConnect = () => {
     if (window.ethereum) {
@@ -17,7 +16,7 @@ function App() {
           getBalance(account[0]);
         });
       window.ethereum.on("changeAccount", onConnect);
-      window.ethereum.on("chainChanged", chainChangedHandler)
+      window.ethereum.on("chainChanged", chainChangedHandler);
     } else {
       alert("You haven't acoount on MetaMask yet");
     }
@@ -25,30 +24,27 @@ function App() {
 
   const chainChangedHandler = () => {
     window.location.reload();
-   }
+  };
   const getBalance = (account) => {
     window.ethereum
       .request({ method: "eth_getBalance", params: [account, "latest"] })
       .then((balance) => {
         setBalance(ethers.utils.formatEther(balance));
-        console.log(balance)
+        console.log(balance);
       });
   };
   return (
     <>
       {userAccount ? (
         <div>
-          <span>Your account: { userAccount}</span>
-          <span>Your balance : {balance }</span>
+          <span>Your account: {userAccount}</span>
+          <span>Your balance : {balance}</span>
         </div>
       ) : (
         <>
-          <h2>Connect your wallet to app</h2>
           <button onClick={onConnect}>Connect to wallet</button>
         </>
       )}
     </>
   );
-}
-
-export default App;
+};
