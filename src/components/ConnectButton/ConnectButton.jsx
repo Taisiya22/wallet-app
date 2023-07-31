@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ethers } from "ethers";
+import { InfoWrap } from "./ConnectButton.styled";
+import { ConnectBtn } from "./ConnectButton.styled";
 
 export const ConnectButton = () => {
   const [userAccount, setUserAccount] = useState(null);
@@ -36,13 +38,13 @@ export const ConnectButton = () => {
   return (
     <>
       {userAccount ? (
-        <div>
+        <InfoWrap>
           <span>Your account: {userAccount}</span>
           <span>Your balance : {balance}</span>
-        </div>
+        </InfoWrap>
       ) : (
         <>
-          <button onClick={onConnect}>Connect to wallet</button>
+          <ConnectBtn onClick={onConnect}>Connect to wallet</ConnectBtn>
         </>
       )}
     </>
