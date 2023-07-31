@@ -1,12 +1,15 @@
 
+import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
-import { Container } from "./App.styled";
+import { Container, MainWrapp } from "./App.styled";
 
 
 function App() {
   return (
     <Container>
-      <Header/>
+      <Header />
+     <MainWrapp></MainWrapp>
+      <Footer/>
     </Container>
  )
 }

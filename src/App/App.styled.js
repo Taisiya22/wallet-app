@@ -4,6 +4,7 @@ export const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
 //   width: 100%;
 //   & main {
 //     flex: 1;
@@ -11,3 +12,8 @@ export const Container = styled.div`
 //     backdrop-filter: grayscale(100%);
 //   }
 `;
+
+export const MainWrapp = styled.div`
+display: flex;
+flex-grow: 1;
+`
