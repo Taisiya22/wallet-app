@@ -10,11 +10,11 @@ function App() {
     <Container>
       <Header />
       <MainWrapp>
-        <Form/>
-     </MainWrapp>
-      <Footer/>
+        <Form />
+      </MainWrapp>
+      <Footer />
     </Container>
- )
+  );
 }
 
 export default App;
